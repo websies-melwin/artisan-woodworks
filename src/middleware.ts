@@ -78,8 +78,9 @@ export const config = {
     // - api routes
     // - _next (internal Next.js routes)
     // - static files
-    '/((?!api|_next|.*\\..*).*)',
-    // Match admin routes
+    // - admin routes (handled separately)
+    '/((?!api|_next|admin|.*\\..*).*)',
+    // Match admin routes separately
     '/admin/:path*'
   ],
 }
