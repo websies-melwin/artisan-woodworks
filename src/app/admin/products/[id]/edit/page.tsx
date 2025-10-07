@@ -1,12 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { createProduct } from '@/lib/actions/products-mutations'
+import { useState, useEffect } from 'react'
+import { updateProduct } from '@/lib/actions/products-mutations'
 import { useRouter } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import RichTextEditor from '@/components/admin/RichTextEditor'
 import ImageUpload from '@/components/admin/ImageUpload'
 import VideoUpload from '@/components/admin/VideoUpload'
+import type { Database } from '@/lib/types/database'
+
+type Product = Database['public']['Tables']['products']['Row']
 
 interface ProductImage {
   id: string
@@ -19,18 +22,57 @@ interface ProductVideo {
   video_url: string
 }
 
-export default function NewProductPage() {
+export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState('')
+  const [product, setProduct] = useState<Product | null>(null)
+  const [productId, setProductId] = useState<string>('')
   const [descriptionEn, setDescriptionEn] = useState('')
   const [descriptionBg, setDescriptionBg] = useState('')
-  const [step, setStep] = useState<'details' | 'images'>('details')
-  const [createdProductId, setCreatedProductId] = useState<string | null>(null)
   const [images, setImages] = useState<ProductImage[]>([])
   const [video, setVideo] = useState<ProductVideo | null>(null)
 
-  async function handleSubmitDetails(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        const resolvedParams = await params
+        const id = resolvedParams.id
+        setProductId(id)
+        
+        const response = await fetch(`/api/products/${id}`)
+        if (!response.ok) {
+          throw new Error('Failed to load product')
+        }
+        const data = await response.json()
+        setProduct(data)
+        setDescriptionEn(data.description_en || '')
+        setDescriptionBg(data.description_bg || '')
+        
+        // Fetch product images
+        const imagesResponse = await fetch(`/api/products/${id}/images`)
+        if (imagesResponse.ok) {
+          const imagesData = await imagesResponse.json()
+          setImages(imagesData)
+        }
+
+        // Fetch product video
+        const videoResponse = await fetch(`/api/products/${id}/video`)
+        if (videoResponse.ok) {
+          const videoData = await videoResponse.json()
+          setVideo(videoData)
+        }
+      } catch (err) {
+        setError('Failed to load product')
+      } finally {
+        setFetchLoading(false)
+      }
+    }
+    fetchProduct()
+  }, [])
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -48,26 +90,43 @@ export default function NewProductPage() {
       featured: formData.get('featured') === 'on',
     }
 
-    const result = await createProduct(productData)
+    const result = await updateProduct(productId, productData)
     
     if (result.error) {
       setError(result.error)
       setLoading(false)
-    } else if (result.data) {
-      setCreatedProductId(result.data.id)
-      setStep('images')
-      setLoading(false)
+    } else {
+      router.push('/admin/products')
     }
   }
 
-  function handleFinish() {
-    router.push('/admin/products')
+  if (fetchLoading) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-[var(--color-gray-600)]">Loading product...</p>
+      </div>
+    )
+  }
+
+  if (!product) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600">{error || 'Product not found'}</p>
+        <Button 
+          variant="outline" 
+          onClick={() => router.push('/admin/products')}
+          className="mt-4"
+        >
+          Back to Products
+        </Button>
+      </div>
+    )
   }
 
   return (
     <div>
       <h1 className="font-[var(--font-heading)] text-4xl font-bold text-black mb-8">
-        Add New Product
+        Edit Product
       </h1>
 
       {error && (
@@ -76,9 +135,8 @@ export default function NewProductPage() {
         </div>
       )}
 
-      {step === 'details' ? (
-        <form onSubmit={handleSubmitDetails} className="bg-white rounded-lg border border-[var(--color-gray-100)] p-8">
-          <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-[var(--color-gray-100)] p-8">
+        <div className="space-y-6">
           {/* English Name */}
           <div>
             <label htmlFor="name_en" className="block text-sm font-medium text-[var(--color-gray-700)] mb-2">
@@ -89,6 +147,7 @@ export default function NewProductPage() {
               name="name_en"
               type="text"
               required
+              defaultValue={product.name_en}
               className="w-full px-4 py-2 border border-[var(--color-gray-200)] rounded-md"
               disabled={loading}
             />
@@ -104,6 +163,7 @@ export default function NewProductPage() {
               name="name_bg"
               type="text"
               required
+              defaultValue={product.name_bg}
               className="w-full px-4 py-2 border border-[var(--color-gray-200)] rounded-md"
               disabled={loading}
             />
@@ -145,6 +205,7 @@ export default function NewProductPage() {
                 id="category"
                 name="category"
                 required
+                defaultValue={product.category}
                 className="w-full px-4 py-2 border border-[var(--color-gray-200)] rounded-md"
                 disabled={loading}
               >
@@ -164,6 +225,7 @@ export default function NewProductPage() {
                 id="wood_type"
                 name="wood_type"
                 required
+                defaultValue={product.wood_type}
                 className="w-full px-4 py-2 border border-[var(--color-gray-200)] rounded-md"
                 disabled={loading}
               >
@@ -184,6 +246,7 @@ export default function NewProductPage() {
               id="status"
               name="status"
               required
+              defaultValue={product.status}
               className="w-full px-4 py-2 border border-[var(--color-gray-200)] rounded-md"
               disabled={loading}
             >
@@ -199,6 +262,7 @@ export default function NewProductPage() {
               id="featured"
               name="featured"
               type="checkbox"
+              defaultChecked={product.featured}
               className="w-4 h-4 text-[var(--color-wood-yellow)] border-[var(--color-gray-200)] rounded"
               disabled={loading}
             />
@@ -206,71 +270,45 @@ export default function NewProductPage() {
               Feature on homepage
             </label>
           </div>
-        </div>
 
-          <div className="mt-8 flex gap-4">
-            <Button type="submit" variant="primary" disabled={loading}>
-              {loading ? 'Creating...' : 'Continue to Images'}
-            </Button>
-            <Button 
-              type="button" 
-              variant="outline" 
-              onClick={() => router.back()}
+          {/* Product Images */}
+          <div className="pt-6 border-t border-[var(--color-gray-200)]">
+            <h3 className="text-lg font-semibold text-black mb-4">Product Images</h3>
+            <ImageUpload
+              productId={productId}
+              existingImages={images}
+              onImagesChange={setImages}
+              maxImages={10}
               disabled={loading}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      ) : (
-        <div className="bg-white rounded-lg border border-[var(--color-gray-100)] p-8">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-black mb-2">Upload Product Images</h2>
-            <p className="text-sm text-[var(--color-gray-600)]">
-              Add up to 10 images for your product. The first image will be the primary image shown in listings.
-            </p>
+            />
           </div>
 
-          {createdProductId && (
-            <>
-              <ImageUpload
-                productId={createdProductId}
-                existingImages={images}
-                onImagesChange={setImages}
-                maxImages={10}
-                disabled={false}
-              />
-
-              <div className="mt-8 pt-8 border-t border-[var(--color-gray-200)]">
-                <h3 className="text-lg font-semibold text-black mb-4">Product Video (Optional)</h3>
-                <VideoUpload
-                  productId={createdProductId}
-                  existingVideo={video}
-                  onVideoChange={setVideo}
-                  disabled={false}
-                />
-              </div>
-            </>
-          )}
-
-          <div className="mt-8 flex gap-4">
-            <Button 
-              type="button" 
-              variant="primary" 
-              onClick={handleFinish}
-            >
-              {images.length > 0 ? 'Finish' : 'Skip & Finish'}
-            </Button>
-            <Button 
-              type="button" 
-              variant="outline" 
-              onClick={() => router.push('/admin/products')}
-            >
-              Cancel
-            </Button>
+          {/* Product Video */}
+          <div className="pt-6 border-t border-[var(--color-gray-200)]">
+            <h3 className="text-lg font-semibold text-black mb-4">Product Video (Optional)</h3>
+            <VideoUpload
+              productId={productId}
+              existingVideo={video}
+              onVideoChange={setVideo}
+              disabled={loading}
+            />
           </div>
         </div>
-      )}
+
+        <div className="mt-8 flex gap-4">
+          <Button type="submit" variant="primary" disabled={loading}>
+            {loading ? 'Updating...' : 'Update Product'}
+          </Button>
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => router.back()}
+            disabled={loading}
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
     </div>
   )
 }

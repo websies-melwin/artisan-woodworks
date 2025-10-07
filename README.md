@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Artisan Woodworks
 
-## Getting Started
+A luxury, bilingual (English/Bulgarian) website for a handcrafted furniture business in Sofia, Bulgaria.
 
-First, run the development server:
+## 🚀 Features
 
+### Public Site
+- **Bilingual Support**: Full English and Bulgarian translations
+- **Homepage**: Hero section, featured products, CTAs
+- **Catalogue**: Filterable product grid (category, wood type)
+- **Product Details**: Individual product pages with image galleries and videos
+- **About & Contact**: Company story and contact information
+- **Legal Pages**: Privacy Policy and Terms & Conditions
+
+### Admin Panel
+- **Authentication**: Secure login for admin users
+- **Product Management**: Full CRUD operations
+- **Rich Text Editor**: Tiptap for product descriptions
+- **Media Upload**: Images (up to 10) and videos (1 per product)
+- **Image Ordering**: Manage display order of product images
+- **Product Status**: Published, Hidden, Sold
+- **Featured Products**: Mark products for homepage display
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15.5.4 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage
+- **Internationalization**: next-intl
+- **Rich Text**: Tiptap
+- **Icons**: Lucide React
+
+## 📦 Getting Started
+
+### Prerequisites
+- Node.js 18+ installed
+- Supabase account and project
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd artisan-woodworks
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+Create a `.env.local` file with:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## 🗄️ Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Tables
+- `profiles`: Admin user profiles
+- `products`: Product catalog
+- `product_images`: Multiple images per product
+- `product_videos`: Optional video per product
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔐 Admin Access
 
-## Deploy on Vercel
+Default test credentials:
+- Email: test@artisanwoodworks.com
+- Password: TestPass123!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Access the admin panel at: `/admin/login`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Internationalization
+
+The site supports two languages:
+- English (en)
+- Bulgarian (bg)
+
+Translation files located in `/messages/`
+
+## 📝 Project Structure
+
+```
+src/
+├── app/
+│   ├── [locale]/           # Localized public pages
+│   ├── admin/              # Admin panel
+│   └── api/                # API routes
+├── components/
+│   ├── admin/              # Admin components
+│   ├── layout/             # Header, Footer
+│   └── ui/                 # Reusable UI components
+├── lib/
+│   ├── actions/            # Server actions
+│   └── supabase/           # Supabase clients
+└── i18n/                   # i18n configuration
+```
+
+## 🚢 Deployment
+
+This project is configured for deployment on Vercel:
+
+1. Push code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
+
+## 📄 License
+
+Private project for Artisan Woodworks
+
+## 👥 Contact
+
+For questions or support, contact: ahlgrenmelwin8@gmail.com

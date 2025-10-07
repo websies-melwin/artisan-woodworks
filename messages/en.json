@@ -4,12 +4,34 @@
     "catalogue": "Catalogue",
     "about": "About & Contact"
   },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved."
+  },
   "home": {
     "hero": {
       "title": "Artisan Woodworks",
       "subtitle": "Handcrafted furniture that combines timeless elegance with exceptional craftsmanship",
       "ctaPrimary": "View Catalogue",
       "ctaSecondary": "Learn More"
+    },
+    "featured": {
+      "title": "Featured Products",
+      "subtitle": "Discover our handpicked selection of unique, handcrafted furniture pieces",
+      "viewAll": "View All Products"
+    },
+    "about": {
+      "title": "Craftsmanship Meets Design",
+      "description": "Every piece we create is a testament to traditional woodworking techniques combined with modern design sensibilities. Our furniture is built to last generations.",
+      "cta": "Learn Our Story"
+    },
+    "contact": {
+      "title": "Ready to Start Your Project?",
+      "description": "Get in touch to discuss your custom furniture needs. We'd love to bring your vision to life.",
+      "cta": "Contact Us"
     },
     "designSystem": {
       "title": "Design System Preview",
@@ -38,5 +60,135 @@
         "description": "Beautiful pine cabinet with traditional craftsmanship and modern functionality"
       }
     }
+  },
+  "catalogue": {
+    "title": "Our Catalogue",
+    "subtitle": "Browse our collection of handcrafted furniture pieces",
+    "filterByCategory": "Filter by Category",
+    "filterByWood": "Filter by Wood Type",
+    "all": "All",
+    "categories": {
+      "table": "Tables",
+      "chair": "Chairs",
+      "cabinet": "Cabinets",
+      "custom": "Custom"
+    },
+    "wood": {
+      "oak": "Oak",
+      "walnut": "Walnut",
+      "pine": "Pine",
+      "mixed": "Mixed"
+    },
+    "noProducts": "No products found matching your filters"
+  },
+  "about": {
+    "hero": {
+      "title": "About Us",
+      "subtitle": "Discover the passion and craftsmanship behind every piece we create"
+    },
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Founded in the heart of Sofia, Bulgaria, Artisan Woodworks brings together generations of woodworking expertise with contemporary design sensibilities. Each piece we create tells a story of dedication, precision, and artistic vision.",
+      "paragraph2": "We believe that furniture should be more than functional—it should be a reflection of your personality and a testament to quality craftsmanship that stands the test of time."
+    },
+    "craftsmanship": {
+      "title": "Our Process",
+      "subtitle": "From concept to completion, every step is executed with meticulous care",
+      "step1": {
+        "title": "Design & Planning",
+        "description": "We work closely with you to understand your vision and create detailed plans that bring your ideas to life."
+      },
+      "step2": {
+        "title": "Material Selection",
+        "description": "Only the finest woods are chosen, carefully inspected for quality, grain, and character."
+      },
+      "step3": {
+        "title": "Handcrafted Construction",
+        "description": "Using traditional techniques combined with modern tools, we craft each piece with exceptional attention to detail."
+      }
+    },
+    "contact": {
+      "title": "Get In Touch",
+      "subtitle": "Ready to discuss your custom furniture project? We'd love to hear from you.",
+      "email": "Email Us",
+      "social": "Follow Us",
+      "cta": "Send Us a Message"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "introduction": {
+      "title": "Introduction",
+      "paragraph1": "At Artisan Woodworks, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.",
+      "paragraph2": "By using our website, you consent to the practices described in this policy."
+    },
+    "collection": {
+      "title": "Information We Collect",
+      "paragraph": "We may collect the following types of information:",
+      "item1": "Contact information (name, email address) when you reach out to us",
+      "item2": "Usage data and analytics through cookies and similar technologies",
+      "item3": "Any information you voluntarily provide when inquiring about our services"
+    },
+    "usage": {
+      "title": "How We Use Your Information",
+      "paragraph": "We use your information to:",
+      "item1": "Respond to your inquiries and provide customer service",
+      "item2": "Improve our website and services",
+      "item3": "Send you updates about our products (only with your consent)"
+    },
+    "security": {
+      "title": "Data Security",
+      "paragraph": "We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is 100% secure."
+    },
+    "rights": {
+      "title": "Your Rights",
+      "paragraph": "You have the right to:",
+      "item1": "Access the personal information we hold about you",
+      "item2": "Request correction of inaccurate data",
+      "item3": "Request deletion of your personal information"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "paragraph": "If you have questions about this Privacy Policy, please contact us at"
+    }
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "lastUpdated": "Last Updated",
+    "introduction": {
+      "title": "Introduction",
+      "paragraph": "These Terms and Conditions govern your use of the Artisan Woodworks website and services. By accessing our website, you agree to these terms."
+    },
+    "services": {
+      "title": "Our Services",
+      "paragraph": "Artisan Woodworks provides handcrafted furniture design and manufacturing services. All products are custom-made and specifications are subject to agreement between you and Artisan Woodworks."
+    },
+    "orders": {
+      "title": "Orders and Pricing",
+      "paragraph": "All orders are subject to acceptance and availability. Prices are provided on a project-by-project basis and may vary based on materials, design complexity, and other factors. Final pricing will be confirmed before work begins."
+    },
+    "intellectual": {
+      "title": "Intellectual Property",
+      "paragraph": "All content on this website, including images, text, and designs, is the property of Artisan Woodworks and protected by copyright laws. Unauthorized use is prohibited."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "paragraph": "Artisan Woodworks is not liable for any indirect, incidental, or consequential damages arising from the use of our website or services. Our liability is limited to the amount paid for our services."
+    },
+    "changes": {
+      "title": "Changes to Terms",
+      "paragraph": "We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting to this website."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "paragraph": "For questions regarding these Terms and Conditions, please contact us at"
+    }
+  },
+  "productDetail": {
+    "backToCatalogue": "Back to Catalogue",
+    "interested": "Interested in this piece?",
+    "contactDescription": "Get in touch to discuss custom options, pricing, and delivery.",
+    "contactUs": "Contact Us"
   }
 }
