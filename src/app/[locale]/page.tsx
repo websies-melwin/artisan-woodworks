@@ -1,23 +1,31 @@
+import { useTranslations } from 'next-intl'
 import Button from '@/components/ui/Button'
 import { Card, CardImage, CardContent, CardTitle, CardDescription, CardBadge } from '@/components/ui/Card'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
 
 export default function Home() {
+  const t = useTranslations('home')
+
   return (
     <main className="min-h-screen bg-white">
+      {/* Temporary Language Switcher */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSwitcher />
+      </div>
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center bg-[var(--color-off-white)]">
         <h1 className="font-[var(--font-heading)] text-5xl md:text-6xl font-bold text-black mb-6">
-          Artisan Woodworks
+          {t('hero.title')}
         </h1>
         <p className="font-[var(--font-body)] text-xl text-[var(--color-gray-600)] max-w-2xl mb-8">
-          Handcrafted furniture that combines timeless elegance with exceptional craftsmanship
+          {t('hero.subtitle')}
         </p>
         <div className="flex gap-4">
           <Button variant="primary" size="lg">
-            View Catalogue
+            {t('hero.ctaPrimary')}
           </Button>
           <Button variant="outline" size="lg">
-            Learn More
+            {t('hero.ctaSecondary')}
           </Button>
         </div>
       </section>
@@ -25,24 +33,24 @@ export default function Home() {
       {/* Component Showcase */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="font-[var(--font-heading)] text-4xl font-semibold text-black mb-12 text-center">
-          Design System Preview
+          {t('designSystem.title')}
         </h2>
 
         {/* Buttons */}
         <div className="mb-12">
-          <h3 className="font-[var(--font-heading)] text-2xl font-semibold mb-6">Buttons</h3>
+          <h3 className="font-[var(--font-heading)] text-2xl font-semibold mb-6">{t('designSystem.buttons')}</h3>
           <div className="flex flex-wrap gap-4">
-            <Button variant="primary">Primary Button</Button>
-            <Button variant="secondary">Secondary Button</Button>
-            <Button variant="outline">Outline Button</Button>
-            <Button variant="primary" size="sm">Small</Button>
-            <Button variant="primary" size="lg">Large</Button>
+            <Button variant="primary">{t('designSystem.primaryButton')}</Button>
+            <Button variant="secondary">{t('designSystem.secondaryButton')}</Button>
+            <Button variant="outline">{t('designSystem.outlineButton')}</Button>
+            <Button variant="primary" size="sm">{t('designSystem.small')}</Button>
+            <Button variant="primary" size="lg">{t('designSystem.large')}</Button>
           </div>
         </div>
 
         {/* Cards */}
         <div className="mb-12">
-          <h3 className="font-[var(--font-heading)] text-2xl font-semibold mb-6">Product Cards</h3>
+          <h3 className="font-[var(--font-heading)] text-2xl font-semibold mb-6">{t('designSystem.cards')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card>
               <CardImage>
@@ -52,11 +60,11 @@ export default function Home() {
               </CardImage>
               <CardContent>
                 <div className="mb-3">
-                  <CardBadge>Oak</CardBadge>
+                  <CardBadge>{t('products.oak')}</CardBadge>
                 </div>
-                <CardTitle>Handcrafted Dining Table</CardTitle>
+                <CardTitle>{t('products.diningTable.name')}</CardTitle>
                 <CardDescription>
-                  Elegant oak dining table featuring natural grain patterns and expert joinery
+                  {t('products.diningTable.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -69,11 +77,11 @@ export default function Home() {
               </CardImage>
               <CardContent>
                 <div className="mb-3">
-                  <CardBadge>Walnut</CardBadge>
+                  <CardBadge>{t('products.walnut')}</CardBadge>
                 </div>
-                <CardTitle>Modern Coffee Table</CardTitle>
+                <CardTitle>{t('products.coffeeTable.name')}</CardTitle>
                 <CardDescription>
-                  Contemporary walnut coffee table with clean lines and rich wood tones
+                  {t('products.coffeeTable.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -86,11 +94,11 @@ export default function Home() {
               </CardImage>
               <CardContent>
                 <div className="mb-3">
-                  <CardBadge>Pine</CardBadge>
+                  <CardBadge>{t('products.pine')}</CardBadge>
                 </div>
-                <CardTitle>Rustic Cabinet</CardTitle>
+                <CardTitle>{t('products.cabinet.name')}</CardTitle>
                 <CardDescription>
-                  Beautiful pine cabinet with traditional craftsmanship and modern functionality
+                  {t('products.cabinet.description')}
                 </CardDescription>
               </CardContent>
             </Card>

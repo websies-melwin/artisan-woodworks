@@ -1,7 +1,18 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import createMiddleware from 'next-intl/middleware'
+import { routing } from './i18n/routing'
+
+// Create the next-intl middleware
+const intlMiddleware = createMiddleware(routing)
 
 export async function middleware(request: NextRequest) {
+  // Handle internationalization first for non-admin routes
+  if (!request.nextUrl.pathname.startsWith('/admin')) {
+    return intlMiddleware(request)
+  }
+
+  // Admin route authentication handling
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -33,36 +44,42 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Protect admin routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    // Allow access to login page
-    if (request.nextUrl.pathname === '/admin/login') {
-      // If user is already logged in, redirect to dashboard
-      if (user) {
-        return NextResponse.redirect(new URL('/admin/dashboard', request.url))
-      }
-      return supabaseResponse
+  // Allow access to login page
+  if (request.nextUrl.pathname === '/admin/login') {
+    // If user is already logged in, redirect to dashboard
+    if (user) {
+      return NextResponse.redirect(new URL('/admin/dashboard', request.url))
     }
+    return supabaseResponse
+  }
 
-    // For all other admin routes, require authentication
-    if (!user) {
-      return NextResponse.redirect(new URL('/admin/login', request.url))
-    }
+  // For all other admin routes, require authentication
+  if (!user) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
 
-    // Verify user is admin
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single()
+  // Verify user is admin
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
 
-    if (!profile || profile.role !== 'admin') {
-      return NextResponse.redirect(new URL('/admin/login', request.url))
-    }
+  if (!profile || profile.role !== 'admin') {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    // Match all pathnames except for
+    // - api routes
+    // - _next (internal Next.js routes)
+    // - static files
+    '/((?!api|_next|.*\\..*).*)',
+    // Match admin routes
+    '/admin/:path*'
+  ],
 }

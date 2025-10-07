@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalogue": "Catalogue",
+    "about": "About & Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Artisan Woodworks",
+      "subtitle": "Handcrafted furniture that combines timeless elegance with exceptional craftsmanship",
+      "ctaPrimary": "View Catalogue",
+      "ctaSecondary": "Learn More"
+    },
+    "designSystem": {
+      "title": "Design System Preview",
+      "buttons": "Buttons",
+      "cards": "Product Cards",
+      "primaryButton": "Primary Button",
+      "secondaryButton": "Secondary Button",
+      "outlineButton": "Outline Button",
+      "small": "Small",
+      "large": "Large"
+    },
+    "products": {
+      "oak": "Oak",
+      "walnut": "Walnut",
+      "pine": "Pine",
+      "diningTable": {
+        "name": "Handcrafted Dining Table",
+        "description": "Elegant oak dining table featuring natural grain patterns and expert joinery"
+      },
+      "coffeeTable": {
+        "name": "Modern Coffee Table",
+        "description": "Contemporary walnut coffee table with clean lines and rich wood tones"
+      },
+      "cabinet": {
+        "name": "Rustic Cabinet",
+        "description": "Beautiful pine cabinet with traditional craftsmanship and modern functionality"
+      }
+    }
+  }
+}
