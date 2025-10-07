@@ -25,33 +25,6 @@ export default function Footer({ translations }: FooterProps) {
     <footer className="bg-[var(--color-gray-900)] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-'use client'
-
-import Link from 'next/link'
-import { useLocale } from 'next-intl'
-import { Instagram, Facebook, Mail } from 'lucide-react'
-
-interface FooterProps {
-  translations: {
-    home: string
-    catalogue: string
-    about: string
-    privacy: string
-    terms: string
-    contactUs: string
-    followUs: string
-    allRightsReserved: string
-  }
-}
-
-export default function Footer({ translations }: FooterProps) {
-  const locale = useLocale()
-  const currentYear = new Date().getFullYear()
-
-  return (
-    <footer className="bg-[var(--color-gray-900)] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
             <h3 className="font-[var(--font-heading)] text-xl font-bold mb-4">

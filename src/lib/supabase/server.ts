@@ -30,3 +30,6 @@ export async function createSupabaseServer() {
     }
   )
 }
+
+// Export alias for convenience
+export const createClient = createSupabaseServer
