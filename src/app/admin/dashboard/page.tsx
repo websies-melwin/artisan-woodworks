@@ -1,10 +1,12 @@
 import { getUser } from '@/lib/actions/auth'
+import { getProductStats } from '@/lib/actions/products'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { Package, Plus, Eye } from 'lucide-react'
 
 export default async function DashboardPage() {
   const user = await getUser()
+  const stats = await getProductStats()
 
   return (
     <div>
@@ -24,8 +26,10 @@ export default async function DashboardPage() {
             <h3 className="text-sm font-medium text-[var(--color-gray-600)]">Total Products</h3>
             <Package className="w-5 h-5 text-[var(--color-wood-yellow)]" />
           </div>
-          <p className="text-3xl font-bold text-black">0</p>
-          <p className="text-sm text-[var(--color-gray-600)] mt-2">No products yet</p>
+          <p className="text-3xl font-bold text-black">{stats?.total || 0}</p>
+          <p className="text-sm text-[var(--color-gray-600)] mt-2">
+            {stats?.total === 0 ? 'No products yet' : 'All products'}
+          </p>
         </div>
 
         <div className="bg-white p-6 rounded-lg border border-[var(--color-gray-100)] shadow-sm">
@@ -33,7 +37,7 @@ export default async function DashboardPage() {
             <h3 className="text-sm font-medium text-[var(--color-gray-600)]">Published</h3>
             <Eye className="w-5 h-5 text-green-600" />
           </div>
-          <p className="text-3xl font-bold text-black">0</p>
+          <p className="text-3xl font-bold text-black">{stats?.published || 0}</p>
           <p className="text-sm text-[var(--color-gray-600)] mt-2">Visible to public</p>
         </div>
 
@@ -42,7 +46,7 @@ export default async function DashboardPage() {
             <h3 className="text-sm font-medium text-[var(--color-gray-600)]">Hidden</h3>
             <Eye className="w-5 h-5 text-orange-600" />
           </div>
-          <p className="text-3xl font-bold text-black">0</p>
+          <p className="text-3xl font-bold text-black">{stats?.hidden || 0}</p>
           <p className="text-sm text-[var(--color-gray-600)] mt-2">Not visible</p>
         </div>
 
@@ -51,7 +55,7 @@ export default async function DashboardPage() {
             <h3 className="text-sm font-medium text-[var(--color-gray-600)]">Sold</h3>
             <Package className="w-5 h-5 text-red-600" />
           </div>
-          <p className="text-3xl font-bold text-black">0</p>
+          <p className="text-3xl font-bold text-black">{stats?.sold || 0}</p>
           <p className="text-sm text-[var(--color-gray-600)] mt-2">Marked as sold</p>
         </div>
       </div>
