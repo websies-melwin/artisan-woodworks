@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { createServerClient } from '@/lib/supabase/server';
+import { createSupabaseServer } from '@/lib/supabase/server';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   
   // Fetch featured products from Supabase
-  const supabase = await createServerClient();
+  const supabase = await createSupabaseServer();
   
   const { data: featuredProducts, error } = await supabase
     .from('products')
