@@ -37,9 +37,7 @@ export default async function LocaleLayout({
           about: t('nav.about'),
         }}
       />
-      <main className="min-h-screen">
-        {children}
-      </main>
+      {children}
       <Footer
         translations={{
           home: t('nav.home'),
