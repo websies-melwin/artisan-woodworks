@@ -42,11 +42,11 @@ export default function HomePage() {
           {/* Video structure ready: <video autoPlay muted loop playsInline className="w-full h-full object-cover"><source src="CLIENT_VIDEO_URL" type="video/mp4" /></video> */}
           
           <Image
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80"
+            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80&fit=crop"
             alt="Luxury handcrafted furniture"
-            fill
+            fill={true}
             className="object-cover"
-            priority
+            priority={true}
           />
           
           {/* Dark overlay for text readability */}
@@ -82,14 +82,17 @@ export default function HomePage() {
           SECTION 2: BRAND STORY
           ═══════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-24 bg-stone-50">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-6">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="font-heading text-4xl md:text-5xl font-semibold mb-6">
             Craftsmanship Meets Design
           </h2>
-          <p className="font-body text-lg text-gray-700 leading-relaxed mb-8">
+          <p className="font-body text-lg md:text-xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto">
             Every piece we create is a testament to traditional woodworking techniques combined with modern design sensibilities. Our furniture is built to last generations.
           </p>
-          <Link href="/en/about" className="text-[var(--color-wood-brown)] hover:text-[var(--color-wood-yellow)] transition-colors font-medium">
+          <Link 
+            href="/bg/about" 
+            className="inline-block text-[var(--color-wood-brown)] hover:text-[var(--color-wood-yellow)] transition-colors font-medium text-lg"
+          >
             Learn Our Story →
           </Link>
         </div>
@@ -111,7 +114,7 @@ export default function HomePage() {
                   <Image
                     src={product.image}
                     alt={product.name}
-                    fill
+                    fill={true}
                     className="object-cover"
                   />
                 </div>
@@ -147,7 +150,7 @@ export default function HomePage() {
               <Image
                 src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&q=80"
                 alt="Design consultation"
-                fill
+                fill={true}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/20" />
@@ -156,7 +159,7 @@ export default function HomePage() {
               <Image
                 src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80"
                 alt="Material selection"
-                fill
+                fill={true}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/20" />
@@ -165,7 +168,7 @@ export default function HomePage() {
               <Image
                 src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80"
                 alt="Handcrafting"
-                fill
+                fill={true}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/20" />
@@ -183,19 +186,19 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════
           SECTION 5: CONTACT CTA
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-24">
+      <section className="py-20 md:py-32">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-heading text-4xl md:text-5xl font-semibold mb-6">
             Ready to Start Your Project?
           </h2>
-          <p className="font-body text-lg text-gray-700 mb-8">
+          <p className="font-body text-lg md:text-xl text-gray-700 mb-10 leading-relaxed">
             Get in touch to discuss your custom furniture needs. We'd love to bring your vision to life.
           </p>
           <a 
             href="mailto:info@artisanwoodworks.com?subject=Inquiry%20from%20Website"
-            className="inline-block bg-[var(--color-wood-yellow)] text-black px-8 py-4 rounded hover:bg-[var(--color-wood-brown)] transition-colors font-medium"
+            className="inline-block bg-[var(--color-wood-yellow)] text-black px-10 py-4 rounded-md hover:bg-[var(--color-wood-brown)] transition-colors font-medium text-lg"
           >
-            Contact Us via Email
+            Contact Us
           </a>
         </div>
       </section>
